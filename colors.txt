@@ -1,6 +1,0 @@
-Orange (primary) #EB5B00
-Green (background) #226F54
-White (Font Colors) #F4F0BB
-Navy () #143D60
-Dark Green	#A0C878
-Red (Errors) #DA2C38
