@@ -1,0 +1,100 @@
+﻿Which country won the first FIFA World Cup in 1930?:Uruguay:Brazil:Argentina
+Who scored the "Hand of God" goal in the 1986 World Cup?:Diego Maradona:Pelé:Lionel Messi
+Which nation hosted the 2018 FIFA World Cup?:Russia:Brazil:Qatar
+What year did France first win the FIFA World Cup?:1998:2018:1984
+Which player has scored the most World Cup goals?:Miroslav Klose:Pelé:Ronaldo Nazário
+Who holds the record for most Ballon d’Or awards?:Lionel Messi:Cristiano Ronaldo:Johan Cruyff
+Which player is nicknamed "The GOAT" in football?:Lionel Messi:Pelé:Diego Maradona
+Who is the all-time top scorer for Portugal?:Cristiano Ronaldo:Luis Figo:Eusébio
+Which goalkeeper won the Ballon d’Or in 2006?:Fabio Cannavaro:Gianluigi Buffon:Iker Casillas
+Who scored the fastest goal in World Cup history (11 seconds)?:Hakan Şükür:Clint Dempsey:Václav Mašek
+Which club has won the most UEFA Champions League titles?:Real Madrid:AC Milan:Bayern Munich
+Which English club is known as "The Red Devils"?:Manchester United:Liverpool:Arsenal
+In which league does FC Barcelona compete?:La Liga:Serie A:Bundesliga
+Which stadium is home to Liverpool FC?:Anfield:Old Trafford:Etihad Stadium
+Which club won the first Premier League title in 1992-93?:Manchester United:Aston Villa:Blackburn Rovers
+What is a "hat-trick" in football?:Scoring 3 goals in a match:Scoring with 3 different body parts:Assisting 3 goals
+How long is a standard FIFA match (excluding extra time)?:90 minutes:60 minutes:120 minutes
+What is a "yellow card" awarded for?:Caution (foul/misconduct):Celebration in front of fans:Deliberate handball
+What is the maximum number of substitutions allowed in a match (as of 2023)?:5:3:7
+What is the term for a goal scored directly from a kickoff?:Olympic goal:Golden goal:Silly goal
+Which stadium hosted the 2014 World Cup final?:Maracanã Stadium:Estadio Azteca:Wembley Stadium
+What is the largest football stadium in the world?:Rungrado 1st of May Stadium:Camp Nou:Michigan Stadium
+Which stadium hosted the 2022 Champions League final?:Stade de France:Wembley Stadium:Santiago Bernabéu
+Which country has won the most Copa América titles?:Uruguay:Argentina:Brazil
+Which nation has the most AFC Asian Cup wins?:Japan:South Korea:Iran
+Which African country won the 2021 Africa Cup of Nations?:Senegal:Egypt:Cameroon
+What is the nickname of the Brazilian national team?:Seleção:Azzurri:La Roja
+Which country’s national team is nicknamed "The Socceroos"?:Australia:New Zealand:Japan
+Which city hosted the 1996 UEFA Euro final?:London:Munich:Paris
+Which player was the first to score in five World Cups?:Pelé:Messi:Cristiano Ronaldo
+Which country won the first FIFA Women’s World Cup in 1991?:United States:Germany:Norway
+Who is the all-time top scorer for the USWNT?:Abby Wambach:Mia Hamm:Alex Morgan
+Which manager led Italy to Euro 2020 victory?:Roberto Mancini:Gareth Southgate:Didier Deschamps
+Who is the most successful manager in Champions League history?:Carlo Ancelotti:Zinedine Zidane:Pep Guardiola
+Which country withdrew from hosting the 2022 World Cup before Qatar?:United States:Japan:Australia
+Which player was banned for biting an opponent during the 2014 World Cup?:Luis Suárez:Zinedine Zidane:John Terry
+Which African country reached the 2010 World Cup quarterfinals?:Ghana:Senegal:Nigeria
+Which Asian country reached the 2002 World Cup semifinals?:South Korea:Japan:Iran
+Which club has won the most FIFA Club World Cups?:Real Madrid:Barcelona:Bayern Munich
+Which player won the Golden Boy Award in 2020?:Erling Haaland:Ansu Fati:Jude Bellingham
+What does VAR stand for?:Video Assistant Referee:Virtual Analysis Review:Video Assessment Rule
+Which World Cup first used goal-line technology?:2014:2010:2018
+Which film features the fictional club "Boratia"?:Ted Lasso:Bend It Like Beckham:The English Game
+Which video game series is synonymous with football?:FIFA:Pro Evolution Soccer:Madden NFL
+Which player had the most expensive transfer fee (as of 2023)?:Neymar:Kylian Mbappé:Cristiano Ronaldo
+Which club spent over €1 billion in a single transfer window (2023)?:Chelsea:Manchester City:Real Madrid
+Which player has won the most Premier League titles?:Ryan Giggs:David Silva:Sergio Agüero
+Who is the youngest player to score in a World Cup final?:Pelé:Kylian Mbappé:Michael Owen
+Which country won the 2019 Women’s World Cup?:United States:Germany:Netherlands
+What is the nickname of Argentina’s national team?:La Albiceleste:La Roja:Azzurri
+Which player scored the "Goal of the Century" in 1986?:Diego Maradona:Pelé:Marco van Basten
+Which stadium is nicknamed "The Theatre of Dreams"?:Old Trafford:Camp Nou:Santiago Bernabéu
+Which player has the most Champions League goals?:Cristiano Ronaldo:Lionel Messi:Raúl
+Which country won Euro 2016?:Portugal:France:Germany
+What is the name of Real Madrid’s home stadium?:Santiago Bernabéu:Camp Nou:Wanda Metropolitano
+Which player won the Ballon d’Or in 2023?:Lionel Messi:Luka Modrić:Erling Haaland
+Which club is known as "The Citizens"?:Manchester City:Manchester United:Liverpool
+What is the capacity of Camp Nou?:99,354:85,000:105,000
+Which country hosted the 1998 World Cup?:France:Italy:Germany
+Who is the manager of the Brazil national team (as of 2023)?:Tite:Roberto Martínez:Didier Deschamps
+Which player has the most assists in Bundesliga history?:Thomas Müller:Robert Lewandowski:Marco Reus
+Which league is known as "La Liga"?:Spain:Italy:France
+Which player scored the most goals in a single Champions League season?:Cristiano Ronaldo:Lionel Messi:Robert Lewandowski
+Which country won the 2023 Women’s World Cup?:Spain:England:Sweden
+What is the name of Germany’s national stadium?:Allianz Arena:Westfalenstadion:Olympiastadion Berlin
+Which player has the most caps for Spain?:Sergio Ramos:Iker Casillas:Andrés Iniesta
+Which club won the 2022-23 Premier League title?:Manchester City:Liverpool:Chelsea
+Who is the top scorer in Champions League history?:Cristiano Ronaldo:Lionel Messi:Robert Lewandowski
+Which country won the 2022 World Cup?:Argentina:France:Croatia
+Which player won the Golden Boot at the 2022 World Cup?:Kylian Mbappé:Lionel Messi:Harry Kane
+Which club is known as "The Blues"?:Chelsea:Everton:Leicester City
+Which player has the most goals for Bayern Munich?:Robert Lewandowski:Gerd Müller:Thomas Müller
+Which country has won the most Olympic gold medals in men’s football?:Hungary:Brazil:Great Britain
+Which player scored the "Perfect Hat-Trick" (left, right, header) in El Clásico?:Lionel Messi:Cristiano Ronaldo:Ronaldo Nazário
+Which stadium hosted the 2023 Champions League final?:Atatürk Olympic Stadium:Wembley Stadium:Santiago Bernabéu
+Which player has the most goals in a single Premier League season?:Erling Haaland:Mo Salah:Luis Suárez
+Which country won the 2023 Copa América?:Argentina:Brazil:Uruguay
+Which manager has won the most Premier League titles?:Sir Alex Ferguson:Pep Guardiola:José Mourinho
+Which player has the most assists in Premier League history?:Ryan Giggs:Cesc Fàbregas:Kevin De Bruyne
+Which club is known as "The Gunners"?:Arsenal:Tottenham Hotspur:West Ham United
+Which player has the most goals for the Netherlands?:Robin van Persie:Arjen Robben:Marco van Basten
+Which country won the 2023 Women’s World Cup?:Spain:England:Sweden
+Which player won the Ballon d’Or in 2022?:Karim Benzema:Lionel Messi:Sadio Mané
+Which club won the 2022-23 Serie A title?:Napoli:Inter Milan:AC Milan
+Which player has the most goals for Real Madrid?:Cristiano Ronaldo:Raúl:Karim Benzema
+Which country won the 2023 Africa Cup of Nations?:Ivory Coast:Senegal:Egypt
+Which player has the most goals for Belgium?:Romelu Lukaku:Kevin De Bruyne:Eden Hazard
+Which club is known as "The Foxes"?:Leicester City:Wolverhampton Wanderers:Aston Villa
+Which player has the most goals for Sweden?:Zlatan Ibrahimović:Sven Rydell:Henrik Larsson
+Which player became the most expensive goalkeeper in history (2018)?:Kepa Arrizabalaga:Alisson Becker:Ederson Moraes
+Who is the oldest player to score in a World Cup final?:Pelé (17 years old):Diego Maradona (25 years old):Lionel Messi (34 years old)
+Which country won the 2023 Women’s World Cup Golden Boot?:Olga Carmona (Spain):Megan Rapinoe (USA):Sam Kerr (Australia)
+Which club has lost the most UEFA Champions League finals?:Juventus:Bayern Munich:AC Milan
+What is the name of the rivalry between Manchester United and Manchester City?:Manchester Derby:North West Derby:Battle of the Bridge
+Which player scored the "Goal of the Century" in the 1986 World Cup?:Diego Maradona:Pelé:Marco van Basten
+Which country won the first UEFA Nations League in 2019?:Portugal:Netherlands:England
+Who is the only player to win the Ballon d’Or while playing for a non-European club?:Higuaín (Napoli):Pelé (Santos):Messi (Barcelona)
+Which stadium hosted the 2023 Women’s World Cup final?:Stadium Australia (Sydney):Wembley Stadium:Parc des Princes
+Which club was the first to win three consecutive UEFA Champions League titles (2016-2018)?:Real Madrid:FC Barcelona:Bayern Munich
+What is the nickname of the Netherlands national team?:Oranje:Azzurri:La Roja
