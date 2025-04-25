@@ -16,8 +16,11 @@
     <Filter Include="data">
       <UniqueIdentifier>{d1e474f6-14d6-4236-8101-6d1abc522104}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{f044ac7d-0020-4105-8ffe-d4f5d7c942a0}</UniqueIdentifier>
+    <Filter Include="Header Files\classes">
+      <UniqueIdentifier>{d604281d-ae36-42a0-b88f-d1fee5c864f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\forms">
+      <UniqueIdentifier>{62f5b9e8-0c62-4967-a383-23b8df9e24eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,34 +29,41 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main-form.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="login-form.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="account.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="file-helper.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="game-form.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="question.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="data\accounts.txt">
       <Filter>data</Filter>
     </Text>
     <Text Include="data\questions.txt">
       <Filter>data</Filter>
     </Text>
+    <Text Include="todo.txt" />
+    <Text Include="data\scores.txt">
+      <Filter>data</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="classes\account.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\game.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\question.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="forms\delete-form.h">
+      <Filter>Header Files\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="forms\game-form.h">
+      <Filter>Header Files\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="forms\login-form.h">
+      <Filter>Header Files\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="forms\main-form.h">
+      <Filter>Header Files\forms</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,12 +14,14 @@ private:
 	String^ _password;
 	String^ _path;
 	int _highestScore;
+	bool _makredForDelete;
 
 private:
 	AccountsManager(String^ username, String^ password, int highestScore) {
 		_username = username;
 		_password = password;
 		_highestScore = highestScore;
+		_makredForDelete = false;
 	}
 
 public:
@@ -34,19 +36,11 @@ public:
 		this->_password = foundAccount->getPassword();
 		this->_username = foundAccount->getUsername();
 		this->_highestScore = foundAccount->getHighestScore();
+		_makredForDelete = false;
 	}
 
 	// Helper functions to work with files
 private:
-	static string _managedStrToNative(String^ sysstr) {
-		using System::IntPtr;
-		using Runtime::InteropServices::Marshal;
-
-		IntPtr ip = Marshal::StringToHGlobalAnsi(sysstr);
-		string outString = static_cast<const char*>(ip.ToPointer());
-		Marshal::FreeHGlobal(ip);
-		return outString;
-	}
 
 	static String^ _convertAccountToRecord(AccountsManager^ account) {
 		String^ record = "";
@@ -58,6 +52,7 @@ private:
 	}
 
 	static AccountsManager^ _convertRecordToAccount(String^ record) {
+
 		auto accountArray = record->Split(':');
 
 		String^ username = accountArray[0];
@@ -68,6 +63,7 @@ private:
 	}
 
 	static void _createFileIfNotExists(String^ path) {
+		int x = 10;
 		if (!File::Exists(path))
 			File::CreateText(path)->Close();
 	}
@@ -177,6 +173,17 @@ public:
 		accounts->Add(account);
 		_writesAccountsToFile(path, accounts);
 
+	}
+
+	bool deleteThisAccount(String^ password) {
+		int x = 10;
+		if (!password->Equals(_password)) return false;
+
+		List<AccountsManager^>^ accounts = _getAccountsFromFile(_path);
+		accounts->Remove(this);
+		_writesAccountsToFile(_path, accounts);
+
+		return true;
 	}
 
 private:

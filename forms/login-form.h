@@ -1,6 +1,7 @@
 #pragma once
-#include <string>
-#include "account.h"
+//#include <string>
+#include "../classes/account.h"
+#include "../global.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -11,25 +12,18 @@ using namespace System::Drawing;
 
 public ref class LoginForm : public System::Windows::Forms::Form {
 private:
-	String^ _ACCOUNTS_FILE_PATH;
+	//String^ _ACCOUNTS_FILE_PATH;
 	AccountsManager^ _account;
 public:
-	LoginForm(String^ accountsFilePath) {
-		_ACCOUNTS_FILE_PATH = accountsFilePath;
+	LoginForm(/*String^ accountsFilePath*/) {
+		//_ACCOUNTS_FILE_PATH = accountsFilePath;
 		InitializeComponent();
 	}
 
 
 protected:
-	/// <summary>
-	/// Clean up any resources being used.
-	/// </summary>
-	~LoginForm()
-	{
-		if (components)
-		{
-			delete components;
-		}
+	~LoginForm() {
+		if (components) delete components;
 	}
 
 private: System::Windows::Forms::Label^ label1;
@@ -44,8 +38,7 @@ private:
 	System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-	void InitializeComponent(void)
-	{
+	void InitializeComponent(void) {
 		this->label1 = (gcnew System::Windows::Forms::Label());
 		this->label2 = (gcnew System::Windows::Forms::Label());
 		this->username_tb = (gcnew System::Windows::Forms::TextBox());
@@ -179,7 +172,6 @@ private:
 	}
 #pragma endregion
 
-
 private:
 
 	void changeTextBoxToErrorState(TextBox^% tb, String^ errorText) {
@@ -198,21 +190,19 @@ private:
 			changeTextBoxToErrorState(username_tb, "This filed is required");
 			return;
 		}
-
 		changeTextboxToNormalState(username_tb);
 
 		if (password_tb->Text->Equals("")) {
 			changeTextBoxToErrorState(password_tb, "This filed is required");
 			return;
 		}
-
 		changeTextboxToNormalState(password_tb);
 
 		String^ username = username_tb->Text;
 		String^ password = password_tb->Text;
 
 		try {
-			_account = AccountsManager::findAccount(_ACCOUNTS_FILE_PATH, username, password);
+			_account = AccountsManager::findAccount(Global::ACCOUNTS_FILE_PATH, username, password);
 			this->DialogResult = Windows::Forms::DialogResult::OK;
 			this->Close();
 		}
@@ -240,8 +230,8 @@ private:
 		String^ password = password_tb->Text;
 
 		try {
-			AccountsManager::addAccount(_ACCOUNTS_FILE_PATH, username, password);
-			_account = AccountsManager::findAccount(_ACCOUNTS_FILE_PATH, username, password);
+			AccountsManager::addAccount(Global::ACCOUNTS_FILE_PATH, username, password);
+			_account = AccountsManager::findAccount(Global::ACCOUNTS_FILE_PATH, username, password);
 			this->DialogResult = Windows::Forms::DialogResult::OK;
 			this->Close();
 		}

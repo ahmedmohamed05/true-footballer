@@ -129,34 +129,33 @@
     <ClCompile Include="main-form.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="account.h" />
-    <ClInclude Include="file-helper.h" />
-    <ClInclude Include="game-form.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="game.h" />
-    <ClInclude Include="login-form.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="main-form.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="question.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="game-form.resx">
-      <DependentUpon>game-form.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="login-form.resx">
-      <DependentUpon>login-form.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="main-form.resx">
-      <DependentUpon>main-form.h</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="data\accounts.txt" />
     <Text Include="data\questions.txt" />
+    <Text Include="data\scores.txt" />
+    <Text Include="todo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="classes\account.h" />
+    <ClInclude Include="classes\game.h" />
+    <ClInclude Include="classes\question.h" />
+    <ClInclude Include="forms\delete-form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="forms\game-form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="forms\login-form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="forms\main-form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="global.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="forms\delete-form.resx">
+      <DependentUpon>forms\delete-form.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

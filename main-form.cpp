@@ -1,6 +1,7 @@
-#include "login-form.h"
-#include "main-form.h"
-#include "game-form.h"
+#include "./forms/login-form.h"
+#include "./forms/main-form.h"
+#include "./forms/game-form.h"
+#include "./global.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -9,18 +10,13 @@ using namespace System::Windows::Forms;
 
 
 void main() {
-	String^ ACCOUNTS_FILE_PATH = "C:\\Users\\Ahmed\\Documents\\study\\visual-programming\\true-footballer\\data\\accounts.txt";
-	String^ SCORES_FILE_PATH = "C:\\Users\\Ahmed\\Documents\\study\\visual-programming\\true-footballer\\data\\scores.txt";
-	String^ QUESTIONS_FILE_PATH = "C:\\Users\\Ahmed\\Documents\\study\\visual-programming\\true-footballer\\data\\questions.txt";
-
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
 	while (1) {
-		LoginForm^ loginForm = gcnew LoginForm(ACCOUNTS_FILE_PATH);
+		LoginForm^ loginForm = gcnew LoginForm();
 		if (loginForm->ShowDialog() != DialogResult::OK) break;
-		MainForm^ form = gcnew MainForm(loginForm->getAccount(), ACCOUNTS_FILE_PATH, QUESTIONS_FILE_PATH, SCORES_FILE_PATH);
+		MainForm^ form = gcnew MainForm(loginForm->getAccount());
 		Application::Run(form);
 	}
-
 }

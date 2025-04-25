@@ -1,0 +1,7 @@
+add diffucility levels
+highlight the right answer after the wrong answer
+congruats the use if he has a new high score
+if the use clicked on sign in without any account pop up a msg box to ask them to create an account
+delete account btn
+add diffucility level insdie the scores list
+show my scors only

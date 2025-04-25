@@ -1,6 +1,7 @@
 #pragma once
-#include "account.h"
+#include "../classes/account.h"
 #include "game-form.h"
+#include "./delete-form.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -15,6 +16,8 @@ private:
 	System::Windows::Forms::Label^ greeting_l;
 	System::Windows::Forms::Button^ logout_btn;
 	System::Windows::Forms::Label^ highestScore_l;
+private:
+	System::Windows::Forms::Button^ deleteAccount_btn;
 	System::Windows::Forms::Button^ startGame_btn;
 
 
@@ -28,17 +31,17 @@ private:
 
 private:
 	AccountsManager^ _currentAccount;
-	String^ _accountsFilePath;
-	String^ _questionsFilePath;
-	String^ _scoresFilePath;
+	//String^ _accountsFilePath;
+	//String^ _questionsFilePath;
+	//String^ _scoresFilePath;
 
 public:
-	MainForm(AccountsManager^ account, String^ accountsFilePath, String^ questionsFilePath, String^ scoresFilePath) {
+	MainForm(AccountsManager^ account/*, String^ accountsFilePath, String^ questionsFilePath, String^ scoresFilePath*/) {
 		InitializeComponent();
 		_currentAccount = account;
-		_accountsFilePath = accountsFilePath;
-		_questionsFilePath = questionsFilePath;
-		_scoresFilePath = scoresFilePath;
+		//_accountsFilePath = accountsFilePath;
+		//_questionsFilePath = questionsFilePath;
+		//_scoresFilePath = scoresFilePath;
 
 		updateGreetingLabel(account->getUsername());
 		updateHighestScoreLabel(account->getHighestScore());
@@ -58,6 +61,7 @@ private:
 		this->logout_btn = (gcnew System::Windows::Forms::Button());
 		this->highestScore_l = (gcnew System::Windows::Forms::Label());
 		this->startGame_btn = (gcnew System::Windows::Forms::Button());
+		this->deleteAccount_btn = (gcnew System::Windows::Forms::Button());
 		this->SuspendLayout();
 		// 
 		// greeting_l
@@ -76,8 +80,8 @@ private:
 		// logout_btn
 		// 
 		this->logout_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-		this->logout_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(218)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
-			static_cast<System::Int32>(static_cast<System::Byte>(56)));
+		this->logout_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(188)), static_cast<System::Int32>(static_cast<System::Byte>(75)),
+			static_cast<System::Int32>(static_cast<System::Byte>(83)));
 		this->logout_btn->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
 			static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(187)));
 		this->logout_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)),
@@ -129,6 +133,27 @@ private:
 		this->startGame_btn->UseVisualStyleBackColor = false;
 		this->startGame_btn->Click += gcnew System::EventHandler(this, &MainForm::startGame_btn_Click);
 		// 
+		// deleteAccount_btn
+		// 
+		this->deleteAccount_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+		this->deleteAccount_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
+			static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(17)));
+		this->deleteAccount_btn->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
+			static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(187)));
+		this->deleteAccount_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)),
+			static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(84)));
+		this->deleteAccount_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+		this->deleteAccount_btn->Font = (gcnew System::Drawing::Font(L"Rubik", 10));
+		this->deleteAccount_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
+			static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(187)));
+		this->deleteAccount_btn->Location = System::Drawing::Point(263, 56);
+		this->deleteAccount_btn->Name = L"deleteAccount_btn";
+		this->deleteAccount_btn->Size = System::Drawing::Size(144, 39);
+		this->deleteAccount_btn->TabIndex = 6;
+		this->deleteAccount_btn->Text = L"Delete Account";
+		this->deleteAccount_btn->UseVisualStyleBackColor = false;
+		this->deleteAccount_btn->Click += gcnew System::EventHandler(this, &MainForm::deleteAccount_btn_click);
+		// 
 		// MainForm
 		// 
 		this->AutoScaleDimensions = System::Drawing::SizeF(9, 24);
@@ -136,6 +161,7 @@ private:
 		this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(111)),
 			static_cast<System::Int32>(static_cast<System::Byte>(84)));
 		this->ClientSize = System::Drawing::Size(420, 188);
+		this->Controls->Add(this->deleteAccount_btn);
 		this->Controls->Add(this->startGame_btn);
 		this->Controls->Add(this->highestScore_l);
 		this->Controls->Add(this->logout_btn);
@@ -161,14 +187,21 @@ private: System::Void logout_btn_Click(System::Object^ sender, System::EventArgs
 		this->Close();
 	}
 }
+
 private: System::Void startGame_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
 
-	GameForm^ gameForm = gcnew GameForm(_currentAccount, _accountsFilePath, _questionsFilePath, _scoresFilePath);
+	//GameForm^ gameForm = gcnew GameForm(_currentAccount, _accountsFilePath, _questionsFilePath, _scoresFilePath);
+	GameForm^ gameForm = gcnew GameForm(_currentAccount);
 	gameForm->ShowDialog();
 
 	this->Show();
 	updateHighestScoreLabel(_currentAccount->getHighestScore());
+}
 
+private: System::Void deleteAccount_btn_click(System::Object^ sender, System::EventArgs^ e) {
+	//DeleteAccountForm^ form = gcnew DeleteAccountForm(_accountsFilePath, _currentAccount);
+	DeleteAccountForm^ form = gcnew DeleteAccountForm(_currentAccount);
+	form->ShowDialog();
 }
 };

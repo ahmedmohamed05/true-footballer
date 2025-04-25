@@ -1,8 +1,8 @@
 #pragma once
-#include "account.h"
-#include "game.h"
-#include "question.h"
-#include "main-form.h"
+#include "../classes/account.h"
+#include "../classes/game.h"
+#include "../classes/question.h"
+#include "./main-form.h"
 
 
 using namespace System;
@@ -19,10 +19,11 @@ private:
 	int _questionNumber, _wrongAnswers, _rightAnswers;
 
 public:
-	GameForm(AccountsManager^ account, String^ accountsFilePath, String^ questionFilePath, String^ scoresFilePath) {
+	GameForm(AccountsManager^ account/*, String^ accountsFilePath, String^ questionFilePath, String^ scoresFilePath*/) {
 		InitializeComponent();
 		_currentAccount = account;
-		_game = gcnew Game(account, accountsFilePath, questionFilePath, scoresFilePath);
+		//_game = gcnew Game(account, accountsFilePath, questionFilePath, scoresFilePath);
+		_game = gcnew Game(account);
 		_questionNumber = 1;
 		_wrongAnswers = 0;
 		_rightAnswers = 0;

@@ -1,9 +1,11 @@
 #pragma once
 #include "account.h"
 #include "question.h"
+#include "../global.h"
 
 using namespace System::IO;
 using namespace System;
+
 
 public ref class Game {
 private:
@@ -13,17 +15,19 @@ private:
 	List<Question^>^ _selectedQuestions;
 	List<Question^>^ _notSelectedQuestions;
 
-	String^ _questionsFilePath;
-	String^ _scoreFilePath;
-	String^ _accountsFilePath;
+	//String^ _questionsFilePath;
+	//String^ _scoreFilePath;
+	//String^ _accountsFilePath;
+
 	Question^ _currentQuestion;
+
 
 private:
 	void _getAllQuestions() {
-
 		// Store all the questions inside a list
 		try {
-			StreamReader^ reader = File::OpenText(_questionsFilePath);
+			//StreamReader^ reader = File::OpenText(_questionsFilePath);
+			StreamReader^ reader = File::OpenText(Global::QUESTIONS_FILE_PATH);
 
 			while (!reader->EndOfStream) {
 				String^ line = reader->ReadLine();
@@ -43,15 +47,18 @@ private:
 	}
 
 public:
-	Game(AccountsManager^ account, String^ accuontsFilePath, String^ questionsFilePath, String^ scoresFilePath) {
+	Game(AccountsManager^ account/*, String^ accuontsFilePath, String^ questionsFilePath, String^ scoresFilePath*/) {
 		_account = account;
 		_isGameOn = true;
+
 		_currentScore = 0;
 		_wrongAnswers = 0;
 		_rightAnswers = 0;
-		_questionsFilePath = questionsFilePath;
-		_scoreFilePath = scoresFilePath;
-		_accountsFilePath = accuontsFilePath;
+
+		//_questionsFilePath = questionsFilePath;
+		//_scoreFilePath = scoresFilePath;
+		//_accountsFilePath = accuontsFilePath;
+
 		_selectedQuestions = gcnew List<Question^>();
 		_notSelectedQuestions = gcnew List<Question^>();
 		_currentQuestion = gcnew Question;
@@ -121,7 +128,8 @@ public:
 		if (isAnsweredCorrect) {
 			_rightAnswers++;
 			_currentScore += 2;
-			_account->incrementScore(_accountsFilePath);
+			//_account->incrementScore(_accountsFilePath);
+			_account->incrementScore(Global::ACCOUNTS_FILE_PATH);
 		}
 		else {
 			_wrongAnswers++;
