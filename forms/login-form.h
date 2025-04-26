@@ -1,6 +1,6 @@
 #pragma once
-//#include <string>
 #include "../classes/account.h"
+#include "../classes/accounts-manager.h"
 #include "../global.h"
 
 using namespace System;
@@ -12,14 +12,13 @@ using namespace System::Drawing;
 
 public ref class LoginForm : public System::Windows::Forms::Form {
 private:
-	//String^ _ACCOUNTS_FILE_PATH;
-	AccountsManager^ _account;
-public:
-	LoginForm(/*String^ accountsFilePath*/) {
-		//_ACCOUNTS_FILE_PATH = accountsFilePath;
-		InitializeComponent();
-	}
+	AccountsManager^ _manager;
 
+public:
+	LoginForm() {
+		InitializeComponent();
+		_manager = gcnew AccountsManager(Global::ACCOUNTS_FILE_PATH);
+	}
 
 protected:
 	~LoginForm() {
@@ -202,18 +201,17 @@ private:
 		String^ password = password_tb->Text;
 
 		try {
-			_account = AccountsManager::findAccount(Global::ACCOUNTS_FILE_PATH, username, password);
+			_manager->signIn(username, password);
 			this->DialogResult = Windows::Forms::DialogResult::OK;
 			this->Close();
 		}
-		catch (const runtime_error& err) {
-			String^ errMsg = gcnew String(err.what());
+		catch (Exception^ e) {
+			String^ errMsg = gcnew String(e->Message);
 			MessageBox::Show(errMsg, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 
 	System::Void createAccount_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-
 		if (username_tb->Text->Equals("")) {
 			changeTextBoxToErrorState(username_tb, "This filed is required");
 			return;
@@ -230,19 +228,18 @@ private:
 		String^ password = password_tb->Text;
 
 		try {
-			AccountsManager::addAccount(Global::ACCOUNTS_FILE_PATH, username, password);
-			_account = AccountsManager::findAccount(Global::ACCOUNTS_FILE_PATH, username, password);
+			_manager->signUp(username, password);
 			this->DialogResult = Windows::Forms::DialogResult::OK;
 			this->Close();
 		}
-		catch (runtime_error& err) {
-			String^ errMsg = gcnew String(err.what());
+		catch (Exception^ err) {
+			String^ errMsg = gcnew String(err->Message);
 			MessageBox::Show(errMsg, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
 
 public:
-	AccountsManager^ getAccount() {
-		return _account;
+	AccountsManager^% getManager() {
+		return _manager;
 	}
 };

@@ -1,7 +1,6 @@
 #pragma once
 #include "../classes/account.h"
 
-
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -11,14 +10,12 @@ using namespace System::Drawing;
 
 public ref class DeleteAccountForm : public System::Windows::Forms::Form {
 private:
-	AccountsManager^ _currentAccount;
-	//String^ _accountsFilePath;
+	AccountsManager^ _manager;
 
 public:
-	DeleteAccountForm(/*String^ accountsFilePath,*/ AccountsManager^ account) {
+	DeleteAccountForm(AccountsManager^% manager) {
 		InitializeComponent();
-		_currentAccount = account;
-		//_accountsFilePath = accountsFilePath;
+		_manager = manager;
 	}
 
 protected:
@@ -31,9 +28,6 @@ private: System::Windows::Forms::TextBox^ password_tb;
 private: System::Windows::Forms::Label^ label2;
 private: System::Windows::Forms::Button^ cancel_btn;
 private: System::Windows::Forms::Button^ deleteAccount_btn;
-
-
-protected:
 
 private:
 	System::ComponentModel::Container^ components;
@@ -171,8 +165,15 @@ private: System::Void deleteAccount_btn_Click(System::Object^ sender, System::Ev
 	password_tb->BackColor = Color::White;
 	password_tb->ForeColor = Color::Black;
 
+	// Last confirmation
+	if (!_confirmDeletion()) {
+		this->Close();
+		return;
+	}
+
+	bool result = _manager->deleteAccount(password);
 	// Check for the password
-	if (!password->Equals(_currentAccount->getPassword())) {
+	if (!result) {
 		MessageBox::Show(
 			"Wrong Password",
 			"Error",
@@ -181,25 +182,13 @@ private: System::Void deleteAccount_btn_Click(System::Object^ sender, System::Ev
 		return;
 	}
 
-	// Last confirmation
-	if (!_confirmDeletion()) {
-		this->Close();
-		return;
-	}
+	MessageBox::Show(
+		"Your account has been deleted successfully",
+		"Deletion Successed",
+		MessageBoxButtons::OK,
+		MessageBoxIcon::Information);
 
-	bool deletionResult = _currentAccount->deleteThisAccount(password);
-
-	if (!deletionResult) {
-		MessageBox::Show(
-			"Your account has been deleted successfully",
-			"Deletion Successed",
-			MessageBoxButtons::OK,
-			MessageBoxIcon::Information);
-
-		Application::Exit();
-		return;
-	}
-
+	Application::Restart();
 }
 
 private: System::Void cancel_btn_Click(System::Object^ sender, System::EventArgs^ e) {

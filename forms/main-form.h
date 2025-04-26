@@ -11,40 +11,24 @@ using namespace System::Data;
 using namespace System::Drawing;
 
 public ref class MainForm : public System::Windows::Forms::Form {
-	// Moved up the declaration of the controls 
-private:
-	System::Windows::Forms::Label^ greeting_l;
-	System::Windows::Forms::Button^ logout_btn;
-	System::Windows::Forms::Label^ highestScore_l;
-private:
-	System::Windows::Forms::Button^ deleteAccount_btn;
-	System::Windows::Forms::Button^ startGame_btn;
-
-
 private:
 	void updateGreetingLabel(String^ username) {
-		this->greeting_l->Text = "Welcome!, " + username;
+		greeting_l->Text = "Welcome!, " + username;
 	}
 	void updateHighestScoreLabel(int newScore) {
-		this->highestScore_l->Text = "Highest Score: " + newScore.ToString();
+		highestScore_l->Text = "Highest Score: " + newScore.ToString();
 	}
 
 private:
-	AccountsManager^ _currentAccount;
-	//String^ _accountsFilePath;
-	//String^ _questionsFilePath;
-	//String^ _scoresFilePath;
+	AccountsManager^ _manager;
 
 public:
-	MainForm(AccountsManager^ account/*, String^ accountsFilePath, String^ questionsFilePath, String^ scoresFilePath*/) {
+	MainForm(AccountsManager^% manager) {
 		InitializeComponent();
-		_currentAccount = account;
-		//_accountsFilePath = accountsFilePath;
-		//_questionsFilePath = questionsFilePath;
-		//_scoresFilePath = scoresFilePath;
+		_manager = manager;
 
-		updateGreetingLabel(account->getUsername());
-		updateHighestScoreLabel(account->getHighestScore());
+		updateGreetingLabel(_manager->getAccountUsername());
+		updateHighestScoreLabel(_manager->getAccountHighestScore());
 	}
 
 protected:
@@ -54,6 +38,12 @@ protected:
 
 private:
 	System::ComponentModel::Container^ components;
+private:
+	System::Windows::Forms::Label^ greeting_l;
+	System::Windows::Forms::Button^ logout_btn;
+	System::Windows::Forms::Label^ highestScore_l;
+	System::Windows::Forms::Button^ deleteAccount_btn;
+	System::Windows::Forms::Button^ startGame_btn;
 
 #pragma region Windows Form Designer generated code
 	void InitializeComponent(void) {
@@ -191,17 +181,15 @@ private: System::Void logout_btn_Click(System::Object^ sender, System::EventArgs
 private: System::Void startGame_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
 
-	//GameForm^ gameForm = gcnew GameForm(_currentAccount, _accountsFilePath, _questionsFilePath, _scoresFilePath);
-	GameForm^ gameForm = gcnew GameForm(_currentAccount);
+	GameForm^ gameForm = gcnew GameForm(_manager);
 	gameForm->ShowDialog();
 
 	this->Show();
-	updateHighestScoreLabel(_currentAccount->getHighestScore());
+	updateHighestScoreLabel(_manager->getAccountHighestScore());
 }
 
 private: System::Void deleteAccount_btn_click(System::Object^ sender, System::EventArgs^ e) {
-	//DeleteAccountForm^ form = gcnew DeleteAccountForm(_accountsFilePath, _currentAccount);
-	DeleteAccountForm^ form = gcnew DeleteAccountForm(_currentAccount);
+	DeleteAccountForm^ form = gcnew DeleteAccountForm(_manager);
 	form->ShowDialog();
 }
 };

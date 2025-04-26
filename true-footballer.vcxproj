@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes\account.h" />
+    <ClInclude Include="classes\accounts-manager.h" />
     <ClInclude Include="classes\game.h" />
     <ClInclude Include="classes\question.h" />
     <ClInclude Include="forms\delete-form.h">

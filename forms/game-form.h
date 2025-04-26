@@ -1,8 +1,8 @@
 #pragma once
-#include "../classes/account.h"
 #include "../classes/game.h"
 #include "../classes/question.h"
 #include "./main-form.h"
+#include "../global.h"
 
 
 using namespace System;
@@ -14,27 +14,21 @@ using namespace System::Drawing;
 
 public ref class GameForm : public System::Windows::Forms::Form {
 private:
-	AccountsManager^ _currentAccount;
+	AccountsManager^ _manager;
 	Game^ _game;
-	int _questionNumber, _wrongAnswers, _rightAnswers;
 
 public:
-	GameForm(AccountsManager^ account/*, String^ accountsFilePath, String^ questionFilePath, String^ scoresFilePath*/) {
+	GameForm(AccountsManager^% manager) {
 		InitializeComponent();
-		_currentAccount = account;
-		//_game = gcnew Game(account, accountsFilePath, questionFilePath, scoresFilePath);
-		_game = gcnew Game(account);
-		_questionNumber = 1;
-		_wrongAnswers = 0;
-		_rightAnswers = 0;
+		_manager = manager;
+		_game = gcnew Game(Global::QUESTIONS_FILE_PATH, 2, 3);
+
 		startGame();
 	}
 
 protected:
 	~GameForm() {
-		if (components) {
-			delete components;
-		}
+		if (components) delete components;
 	}
 
 private: System::Windows::Forms::Label^ questionNumber_l;
@@ -46,10 +40,10 @@ private: System::Windows::Forms::Button^ answer2_btn;
 private: System::Windows::Forms::Button^ answer3_btn;
 private: System::Windows::Forms::Label^ wrongAnswers_l;
 private: System::Windows::Forms::Label^ rightAnswers_l;
-private:
-	System::ComponentModel::Container^ components;
+private: System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
+private:
 	void InitializeComponent(void) {
 		this->questionNumber_l = (gcnew System::Windows::Forms::Label());
 		this->sessionScore_l = (gcnew System::Windows::Forms::Label());
@@ -238,17 +232,27 @@ private:
 private:
 	void checkAnswer(String^ answer) {
 		bool answerState = _game->answer(answer);
-		if (answerState) _rightAnswers++;
-		else _wrongAnswers++;
 
-		if (_wrongAnswers >= 3) {
-			MessageBox::Show("Game Over, Great Job!, Your Score Was: " + _game->getCurrentScore().ToString(),
-				"Game Results", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		if (!_game->isGameOn()) {
+			wrongAnswers_l->Text = "Wrong Answers: " + _game->getWrongAnsweres().ToString();
+			MessageBox::Show(
+				"Game Over, Great Job!, Your Score Was: " + _game->getCurrentScore().ToString(),
+				"Game Results",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Information);
+
+			if (_manager->getAccountHighestScore() < _game->getCurrentScore()) {
+				_manager->setHighestScore(_game->getCurrentScore());
+				MessageBox::Show(
+					"Congratulations you have achived new score!",
+					"Game Results",
+					MessageBoxButtons::OK,
+					MessageBoxIcon::Information);
+			}
 
 			this->Close();
 			return;
 		}
-
 		startGame();
 	}
 
@@ -265,13 +269,12 @@ private:
 		answer3_btn->Text = q->getAnswer3();
 
 		// Update question number
-		questionNumber_l->Text = "Question No. " + _questionNumber.ToString();
-		_questionNumber++;
+		questionNumber_l->Text = "Question No. " + _game->getQuestionNumber().ToString();
 
 		sessionScore_l->Text = "current Score: " + _game->getCurrentScore().ToString();
 
-		wrongAnswers_l->Text = "Wrong Answers: " + _wrongAnswers.ToString();
-		rightAnswers_l->Text = "Right Answers: " + _rightAnswers.ToString();
+		wrongAnswers_l->Text = "Wrong Answers: " + _game->getWrongAnsweres().ToString();
+		rightAnswers_l->Text = "Right Answers: " + _game->getRightAnswers().ToString();
 	}
 
 	void startGame() {
@@ -280,11 +283,10 @@ private:
 			_updateUI(q);
 		}
 
-		catch (const runtime_error& err) {
-			String^ errMsg = gcnew String(err.what());
+		catch (Exception^ err) {
+			String^ errMsg = gcnew String(err->Message);
 			MessageBox::Show(errMsg, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			Application::Exit();
 		}
 	}
-
 };

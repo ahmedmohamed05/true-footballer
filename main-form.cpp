@@ -8,7 +8,6 @@ using namespace System::Windows::Forms;
 
 [STAThreadAttribute]
 
-
 void main() {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
@@ -16,7 +15,7 @@ void main() {
 	while (1) {
 		LoginForm^ loginForm = gcnew LoginForm();
 		if (loginForm->ShowDialog() != DialogResult::OK) break;
-		MainForm^ form = gcnew MainForm(loginForm->getAccount());
+		MainForm^ form = gcnew MainForm(loginForm->getManager());
 		Application::Run(form);
 	}
 }

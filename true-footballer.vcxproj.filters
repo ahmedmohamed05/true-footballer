@@ -65,5 +65,8 @@
     <ClInclude Include="global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="classes\accounts-manager.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
