@@ -139,6 +139,8 @@
     <ClInclude Include="classes\accounts-manager.h" />
     <ClInclude Include="classes\game.h" />
     <ClInclude Include="classes\question.h" />
+    <ClInclude Include="classes\score.h" />
+    <ClInclude Include="classes\scores-manager.h" />
     <ClInclude Include="forms\delete-form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -151,11 +153,20 @@
     <ClInclude Include="forms\main-form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="forms\scores-form.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="global.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="forms\delete-form.resx">
       <DependentUpon>forms\delete-form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\main-form.resx">
+      <DependentUpon>forms\main-form.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\scores-form.resx">
+      <DependentUpon>forms\scores-form.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

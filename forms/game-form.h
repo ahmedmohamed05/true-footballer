@@ -2,6 +2,7 @@
 #include "../classes/game.h"
 #include "../classes/question.h"
 #include "./main-form.h"
+#include "../classes/accounts-manager.h"
 #include "../global.h"
 
 
@@ -230,26 +231,31 @@ private:
 #pragma endregion
 
 private:
+	void gameEnds(int score) {
+		wrongAnswers_l->Text = "Wrong Answers: " + _game->getWrongAnsweres().ToString();
+		MessageBox::Show(
+			"Game Over, Great Job!, Your Score Was: " + score.ToString(),
+			"Game Results",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+
+		if (_manager->getAccountHighestScore() < score) {
+			_manager->setHighestScore(score);
+			MessageBox::Show(
+				"Congratulations you have achived new score!",
+				"Game Results",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Information);
+		}
+
+	}
+
+private:
 	void checkAnswer(String^ answer) {
 		bool answerState = _game->answer(answer);
 
 		if (!_game->isGameOn()) {
-			wrongAnswers_l->Text = "Wrong Answers: " + _game->getWrongAnsweres().ToString();
-			MessageBox::Show(
-				"Game Over, Great Job!, Your Score Was: " + _game->getCurrentScore().ToString(),
-				"Game Results",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Information);
-
-			if (_manager->getAccountHighestScore() < _game->getCurrentScore()) {
-				_manager->setHighestScore(_game->getCurrentScore());
-				MessageBox::Show(
-					"Congratulations you have achived new score!",
-					"Game Results",
-					MessageBoxButtons::OK,
-					MessageBoxIcon::Information);
-			}
-
+			gameEnds(_game->getCurrentScore());
 			this->Close();
 			return;
 		}

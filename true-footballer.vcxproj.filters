@@ -68,5 +68,14 @@
     <ClInclude Include="classes\accounts-manager.h">
       <Filter>Header Files\classes</Filter>
     </ClInclude>
+    <ClInclude Include="classes\score.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="classes\scores-manager.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="forms\scores-form.h">
+      <Filter>Header Files\forms</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

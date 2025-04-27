@@ -5,6 +5,8 @@ using namespace System;
 public ref class Global {
 public:
 	static String^ ACCOUNTS_FILE_PATH = "./data\\accounts.txt";
-	static String^ SCORES_FILE_PATH = "./data\\scores.txt";
+	static char ACCOUNTS_SEPARATOR = ':';
 	static String^ QUESTIONS_FILE_PATH = "./data\\questions.txt";
+	static String^ SCORES_FILE_PATH = "./data\\scores.txt";
+	static char SCORES_SEPARATOR = '#';
 };

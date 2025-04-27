@@ -1,0 +1,6 @@
+green : 34, 111, 84
+orange: 235, 91, 0
+white: 244, 240, 187
+red - dangerous: 252, 5, 17
+red - low: 188, 75, 83
+

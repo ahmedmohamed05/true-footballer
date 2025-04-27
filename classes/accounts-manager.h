@@ -1,5 +1,6 @@
 #pragma once
 #include "./account.h"
+#include "./score.h"
 #include "../global.h"
 
 using namespace System;
@@ -23,6 +24,7 @@ private:
 
 		return record;
 	}
+
 	Account^ _convertRecordToAccount(String^ record) {
 		array<String^>^ accountArray = record->Split(':');
 

@@ -2,6 +2,7 @@
 #include "../classes/account.h"
 #include "game-form.h"
 #include "./delete-form.h"
+#include "./scores-form.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -18,6 +19,9 @@ private:
 	void updateHighestScoreLabel(int newScore) {
 		highestScore_l->Text = "Highest Score: " + newScore.ToString();
 	}
+private: System::Windows::Forms::Button^ showScores_btn;
+private: System::Windows::Forms::Label^ label1;
+
 
 private:
 	AccountsManager^ _manager;
@@ -38,7 +42,6 @@ protected:
 
 private:
 	System::ComponentModel::Container^ components;
-private:
 	System::Windows::Forms::Label^ greeting_l;
 	System::Windows::Forms::Button^ logout_btn;
 	System::Windows::Forms::Label^ highestScore_l;
@@ -52,6 +55,8 @@ private:
 		this->highestScore_l = (gcnew System::Windows::Forms::Label());
 		this->startGame_btn = (gcnew System::Windows::Forms::Button());
 		this->deleteAccount_btn = (gcnew System::Windows::Forms::Button());
+		this->showScores_btn = (gcnew System::Windows::Forms::Button());
+		this->label1 = (gcnew System::Windows::Forms::Label());
 		this->SuspendLayout();
 		// 
 		// greeting_l
@@ -69,7 +74,7 @@ private:
 		// 
 		// logout_btn
 		// 
-		this->logout_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+		this->logout_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
 		this->logout_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(188)), static_cast<System::Int32>(static_cast<System::Byte>(75)),
 			static_cast<System::Int32>(static_cast<System::Byte>(83)));
 		this->logout_btn->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
@@ -77,12 +82,12 @@ private:
 		this->logout_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)),
 			static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(84)));
 		this->logout_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-		this->logout_btn->Font = (gcnew System::Drawing::Font(L"Rubik", 10));
+		this->logout_btn->Font = (gcnew System::Drawing::Font(L"Rubik", 15.75F, System::Drawing::FontStyle::Bold));
 		this->logout_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->logout_btn->Location = System::Drawing::Point(306, 11);
+		this->logout_btn->Location = System::Drawing::Point(305, 243);
 		this->logout_btn->Name = L"logout_btn";
-		this->logout_btn->Size = System::Drawing::Size(102, 39);
+		this->logout_btn->Size = System::Drawing::Size(290, 58);
 		this->logout_btn->TabIndex = 1;
 		this->logout_btn->Text = L"Logout ";
 		this->logout_btn->UseVisualStyleBackColor = false;
@@ -94,7 +99,7 @@ private:
 		this->highestScore_l->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
 		this->highestScore_l->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->highestScore_l->Location = System::Drawing::Point(15, 51);
+		this->highestScore_l->Location = System::Drawing::Point(12, 51);
 		this->highestScore_l->Name = L"highestScore_l";
 		this->highestScore_l->Size = System::Drawing::Size(161, 29);
 		this->highestScore_l->TabIndex = 2;
@@ -102,8 +107,7 @@ private:
 		// 
 		// startGame_btn
 		// 
-		this->startGame_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
-			| System::Windows::Forms::AnchorStyles::Right));
+		this->startGame_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
 		this->startGame_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(235)), static_cast<System::Int32>(static_cast<System::Byte>(91)),
 			static_cast<System::Int32>(static_cast<System::Byte>(0)));
 		this->startGame_btn->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
@@ -115,9 +119,9 @@ private:
 			static_cast<System::Byte>(0)));
 		this->startGame_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->startGame_btn->Location = System::Drawing::Point(20, 106);
+		this->startGame_btn->Location = System::Drawing::Point(12, 113);
 		this->startGame_btn->Name = L"startGame_btn";
-		this->startGame_btn->Size = System::Drawing::Size(387, 70);
+		this->startGame_btn->Size = System::Drawing::Size(583, 58);
 		this->startGame_btn->TabIndex = 5;
 		this->startGame_btn->Text = L"Start Playing";
 		this->startGame_btn->UseVisualStyleBackColor = false;
@@ -125,7 +129,7 @@ private:
 		// 
 		// deleteAccount_btn
 		// 
-		this->deleteAccount_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+		this->deleteAccount_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
 		this->deleteAccount_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
 			static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(17)));
 		this->deleteAccount_btn->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
@@ -133,16 +137,50 @@ private:
 		this->deleteAccount_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)),
 			static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(84)));
 		this->deleteAccount_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-		this->deleteAccount_btn->Font = (gcnew System::Drawing::Font(L"Rubik", 10));
+		this->deleteAccount_btn->Font = (gcnew System::Drawing::Font(L"Rubik", 15.75F, System::Drawing::FontStyle::Bold));
 		this->deleteAccount_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
 			static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->deleteAccount_btn->Location = System::Drawing::Point(263, 56);
+		this->deleteAccount_btn->Location = System::Drawing::Point(12, 243);
 		this->deleteAccount_btn->Name = L"deleteAccount_btn";
-		this->deleteAccount_btn->Size = System::Drawing::Size(144, 39);
+		this->deleteAccount_btn->Size = System::Drawing::Size(287, 58);
 		this->deleteAccount_btn->TabIndex = 6;
 		this->deleteAccount_btn->Text = L"Delete Account";
 		this->deleteAccount_btn->UseVisualStyleBackColor = false;
 		this->deleteAccount_btn->Click += gcnew System::EventHandler(this, &MainForm::deleteAccount_btn_click);
+		// 
+		// showScores_btn
+		// 
+		this->showScores_btn->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
+		this->showScores_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(111)),
+			static_cast<System::Int32>(static_cast<System::Byte>(84)));
+		this->showScores_btn->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)),
+			static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(187)));
+		this->showScores_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)),
+			static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(84)));
+		this->showScores_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+		this->showScores_btn->Font = (gcnew System::Drawing::Font(L"Rubik", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			static_cast<System::Byte>(0)));
+		this->showScores_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
+			static_cast<System::Int32>(static_cast<System::Byte>(187)));
+		this->showScores_btn->Location = System::Drawing::Point(12, 179);
+		this->showScores_btn->Name = L"showScores_btn";
+		this->showScores_btn->Size = System::Drawing::Size(583, 58);
+		this->showScores_btn->TabIndex = 7;
+		this->showScores_btn->Text = L"Show Scores List";
+		this->showScores_btn->UseVisualStyleBackColor = false;
+		this->showScores_btn->Click += gcnew System::EventHandler(this, &MainForm::showScores_btn_Click);
+		// 
+		// label1
+		// 
+		this->label1->AutoSize = true;
+		this->label1->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
+		this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
+			static_cast<System::Int32>(static_cast<System::Byte>(187)));
+		this->label1->Location = System::Drawing::Point(294, 16);
+		this->label1->Name = L"label1";
+		this->label1->Size = System::Drawing::Size(95, 29);
+		this->label1->TabIndex = 8;
+		this->label1->Text = L"Difficulty:";
 		// 
 		// MainForm
 		// 
@@ -150,7 +188,9 @@ private:
 		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 		this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(111)),
 			static_cast<System::Int32>(static_cast<System::Byte>(84)));
-		this->ClientSize = System::Drawing::Size(420, 188);
+		this->ClientSize = System::Drawing::Size(607, 319);
+		this->Controls->Add(this->label1);
+		this->Controls->Add(this->showScores_btn);
 		this->Controls->Add(this->deleteAccount_btn);
 		this->Controls->Add(this->startGame_btn);
 		this->Controls->Add(this->highestScore_l);
@@ -160,7 +200,6 @@ private:
 			static_cast<System::Byte>(0)));
 		this->Margin = System::Windows::Forms::Padding(4, 6, 4, 6);
 		this->MaximizeBox = false;
-		this->MaximumSize = System::Drawing::Size(9999, 320);
 		this->MinimizeBox = false;
 		this->MinimumSize = System::Drawing::Size(436, 227);
 		this->Name = L"MainForm";
@@ -191,5 +230,14 @@ private: System::Void startGame_btn_Click(System::Object^ sender, System::EventA
 private: System::Void deleteAccount_btn_click(System::Object^ sender, System::EventArgs^ e) {
 	DeleteAccountForm^ form = gcnew DeleteAccountForm(_manager);
 	form->ShowDialog();
+}
+
+private: System::Void showScores_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+
+	ScoresForm^ scoresForm = gcnew ScoresForm();
+	scoresForm->ShowDialog();
+
+	this->Show();
 }
 };
