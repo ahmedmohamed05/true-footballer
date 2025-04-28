@@ -404,4 +404,5 @@ private: System::Void filters_cb_SelectedIndexChanged(System::Object^ sender, Sy
 	Filters filter = Filters(i);
 	updateScoresList(_scoresManager->getList(), filter);
 }
+
 };
