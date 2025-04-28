@@ -1,8 +1,11 @@
 #pragma once
-#include "../classes/account.h"
+// Forms
 #include "game-form.h"
 #include "./delete-form.h"
 #include "./scores-form.h"
+// Classes
+#include "../classes/account.h"
+#include "../classes/accounts-manager.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -19,20 +22,16 @@ private:
 	void updateHighestScoreLabel(int newScore) {
 		highestScore_l->Text = "Highest Score: " + newScore.ToString();
 	}
-private: System::Windows::Forms::Button^ showScores_btn;
-private: System::Windows::Forms::Label^ label1;
-
 
 private:
-	AccountsManager^ _manager;
-
+	AccountsManager^ _accountsManager;
 public:
 	MainForm(AccountsManager^% manager) {
 		InitializeComponent();
-		_manager = manager;
 
-		updateGreetingLabel(_manager->getAccountUsername());
-		updateHighestScoreLabel(_manager->getAccountHighestScore());
+		_accountsManager = manager;
+		updateGreetingLabel(_accountsManager->getAccountUsername());
+		updateHighestScoreLabel(_accountsManager->getAccountHighestScore());
 	}
 
 protected:
@@ -47,6 +46,8 @@ private:
 	System::Windows::Forms::Label^ highestScore_l;
 	System::Windows::Forms::Button^ deleteAccount_btn;
 	System::Windows::Forms::Button^ startGame_btn;
+	System::Windows::Forms::Button^ showScores_btn;
+	System::Windows::Forms::Label^ label1;
 
 #pragma region Windows Form Designer generated code
 	void InitializeComponent(void) {
@@ -211,7 +212,7 @@ private:
 #pragma endregion
 
 private: System::Void logout_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-	System::Windows::Forms::DialogResult logoutConfirmation = MessageBox::Show("Do you want to log out", "Confirmation", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+	auto logoutConfirmation = MessageBox::Show("Do you want to log out", "Confirmation", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 	if (logoutConfirmation == Windows::Forms::DialogResult::Yes) {
 		this->Close();
 	}
@@ -220,22 +221,22 @@ private: System::Void logout_btn_Click(System::Object^ sender, System::EventArgs
 private: System::Void startGame_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
 
-	GameForm^ gameForm = gcnew GameForm(_manager);
+	GameForm^ gameForm = gcnew GameForm(_accountsManager);
 	gameForm->ShowDialog();
 
 	this->Show();
-	updateHighestScoreLabel(_manager->getAccountHighestScore());
+	updateHighestScoreLabel(_accountsManager->getAccountHighestScore());
 }
 
 private: System::Void deleteAccount_btn_click(System::Object^ sender, System::EventArgs^ e) {
-	DeleteAccountForm^ form = gcnew DeleteAccountForm(_manager);
+	DeleteAccountForm^ form = gcnew DeleteAccountForm(_accountsManager);
 	form->ShowDialog();
 }
 
 private: System::Void showScores_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
 
-	ScoresForm^ scoresForm = gcnew ScoresForm();
+	ScoresForm^ scoresForm = gcnew ScoresForm(_accountsManager->getAccountUsername());
 	scoresForm->ShowDialog();
 
 	this->Show();

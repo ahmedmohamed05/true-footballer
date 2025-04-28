@@ -1,2 +1,1 @@
-ahmed:1234:0
-hader:hader:0
+ahmed:ahmed:0

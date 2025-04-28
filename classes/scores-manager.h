@@ -8,7 +8,6 @@ using namespace System::IO;
 public ref class ScoresManager {
 private:
 	String^ _scoresPath;
-	char _separator;
 	List<Score^>^ _scores;
 
 	// Files Functions
@@ -19,19 +18,18 @@ private:
 	}
 
 	List<Score^>^ _loadScores() {
-		List<Score^>^ list = gcnew List<Score^>();
+		List<Score^>^ list = gcnew List<Score^>;
 
 		try {
 			StreamReader^ reader = File::OpenText(_scoresPath);
 
 			while (!reader->EndOfStream) {
 				String^ record = reader->ReadLine();
-				Score^ score = Score::convertToScore(record, _separator);
-				_scores->Add(score);
+				Score^ score = Score::convertToScore(record);
+				list->Add(score);
 			}
 
 			reader->Close();
-			return list;
 		}
 		catch (FileNotFoundException^ ex) {
 			throw gcnew Exception(ex->Message + ", Not Found Error");
@@ -40,8 +38,7 @@ private:
 			throw gcnew Exception(ex->Message + ", Unauthorized Error");
 		}
 
-		return nullptr; // This will never happene
-
+		return list;
 	}
 
 	void _saveScores() {
@@ -52,7 +49,7 @@ private:
 
 			// Convert scores to record and write them
 			for each (Score ^ %score in _scores) {
-				writer->WriteLine(score->getRecord(_separator));
+				writer->WriteLine(score->getRecord());
 			}
 
 			writer->Close();
@@ -66,9 +63,8 @@ private:
 	}
 
 public:
-	ScoresManager(String^ scoresFilePath, char scoresSeparator) {
+	ScoresManager(String^ scoresFilePath) {
 		_scoresPath = scoresFilePath;
-		_separator = scoresSeparator;
 
 		_createFileIfNotExists();
 

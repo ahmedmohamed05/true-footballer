@@ -1,9 +1,10 @@
 #pragma once
+#include "../global.h"
+#include "./main-form.h"
 #include "../classes/game.h"
 #include "../classes/question.h"
-#include "./main-form.h"
 #include "../classes/accounts-manager.h"
-#include "../global.h"
+#include "../classes/scores-manager.h"
 
 
 using namespace System;
@@ -15,14 +16,17 @@ using namespace System::Drawing;
 
 public ref class GameForm : public System::Windows::Forms::Form {
 private:
-	AccountsManager^ _manager;
+	AccountsManager^ _accountsManager;
 	Game^ _game;
+	ScoresManager^ _scoresManager;
 
 public:
 	GameForm(AccountsManager^% manager) {
 		InitializeComponent();
-		_manager = manager;
+
+		_accountsManager = manager;
 		_game = gcnew Game(Global::QUESTIONS_FILE_PATH, 2, 3);
+		_scoresManager = gcnew ScoresManager(Global::SCORES_FILE_PATH);
 
 		startGame();
 	}
@@ -231,16 +235,30 @@ private:
 #pragma endregion
 
 private:
+	Score^ getEndScore() {
+		int x = 10;
+		auto dt = DateTime::Now;
+		auto now = dt.Day + ":" + dt.Month + ":" + dt.Year + " at " + dt.Hour + ":" + dt.Minute + ":" + dt.Second;
+		auto username = _accountsManager->getAccountUsername();
+		auto s = _game->getCurrentScore();
+		auto qn = _game->getQuestionNumber();
+		auto ra = _game->getRightAnswers();
+		auto wa = _game->getWrongAnsweres();
+
+		return gcnew Score(username, s, now, qn, ra, wa);
+	}
+
 	void gameEnds(int score) {
 		wrongAnswers_l->Text = "Wrong Answers: " + _game->getWrongAnsweres().ToString();
+
 		MessageBox::Show(
 			"Game Over, Great Job!, Your Score Was: " + score.ToString(),
 			"Game Results",
 			MessageBoxButtons::OK,
 			MessageBoxIcon::Information);
 
-		if (_manager->getAccountHighestScore() < score) {
-			_manager->setHighestScore(score);
+		if (_accountsManager->getAccountHighestScore() < score) {
+			_accountsManager->setHighestScore(score);
 			MessageBox::Show(
 				"Congratulations you have achived new score!",
 				"Game Results",
@@ -248,6 +266,7 @@ private:
 				MessageBoxIcon::Information);
 		}
 
+		_scoresManager->addScore(getEndScore());
 	}
 
 private:

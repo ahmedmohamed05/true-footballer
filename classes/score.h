@@ -27,8 +27,8 @@ public:
 	int getWrongAnswers() { return _wrongAnswers; }
 
 public: // Static Converters
-	static Score^ convertToScore(String^ record, char Separator) {
-		array<String^>^ arr = record->Split(Separator);
+	static Score^ convertToScore(String^ record) {
+		array<String^>^ arr = record->Split('#');
 
 		if (arr->Length != 6) throw gcnew Exception("Format Error");
 
@@ -53,19 +53,19 @@ public: // Static Converters
 		return nullptr;// This will never happene
 	}
 
-	static String^ converToRecord(Score^ score, char separator) {
+	static String^ converToRecord(Score^ score) {
 		String^ record = "";
 
-		record += score->getUsername() + separator;
-		record += score->getScore().ToString() + separator;
-		record += score->getTimeDate() + separator;
-		record += score->getNumberOfQuestions().ToString() + separator;
-		record += score->getRightAnswers().ToString() + separator;
+		record += score->getUsername() + "#";
+		record += score->getScore().ToString() + "#";
+		record += score->getTimeDate() + "#";
+		record += score->getNumberOfQuestions().ToString() + "#";
+		record += score->getRightAnswers().ToString() + "#";
 		record += score->getWrongAnswers().ToString();
 
 		return record;
 	}
 
 public:
-	String^ getRecord(char separator) { return converToRecord(this, separator); }
+	String^ getRecord() { return converToRecord(this); }
 };

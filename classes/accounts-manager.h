@@ -1,7 +1,5 @@
 #pragma once
 #include "./account.h"
-#include "./score.h"
-#include "../global.h"
 
 using namespace System;
 using namespace System::IO;
@@ -177,6 +175,8 @@ public:
 public:
 	String^ getAccountUsername() { return _currentAccount->getUsername(); }
 	int getAccountHighestScore() { return _currentAccount->getHighestScore(); }
-	//Account^% getCurrentAccount() { return _currentAccount; }
-	void setHighestScore(int value) { _currentAccount->setHighestScore(value); }
+	void setHighestScore(int value) {
+		_currentAccount->setHighestScore(value);
+		_saveAccounts();
+	}
 };

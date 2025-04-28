@@ -1,4 +1,5 @@
 #pragma once
+#include "../classes/score.h"
 #include "../classes/scores-manager.h"
 #include "../global.h"
 
@@ -8,13 +9,21 @@ using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
+using namespace System::Collections::Generic;
+
+
+public enum class Filters { Oldest, Newest, MyScores };
+
 public ref class ScoresForm : public System::Windows::Forms::Form {
 private:
-	ScoresManager^ _scoreManager;
+	ScoresManager^ _scoresManager;
+	String^ _username;
+
 public:
-	ScoresForm() {
+	ScoresForm(String^ username) {
 		InitializeComponent();
-		_scoreManager = gcnew ScoresManager(Global::SCORES_FILE_PATH, Global::SCORES_SEPARATOR);
+		_username = username;
+		_scoresManager = gcnew ScoresManager(Global::SCORES_FILE_PATH);
 	}
 
 protected:
@@ -39,8 +48,6 @@ private: System::Windows::Forms::Label^ label3;
 private: System::Windows::Forms::Label^ username_l;
 private: System::Windows::Forms::Button^ back_btn;
 private: System::Windows::Forms::ComboBox^ filters_cb;
-
-
 
 private:
 	System::ComponentModel::Container^ components;
@@ -94,6 +101,7 @@ private:
 		this->scores_lst->Name = L"scores_lst";
 		this->scores_lst->Size = System::Drawing::Size(458, 261);
 		this->scores_lst->TabIndex = 3;
+		this->scores_lst->SelectedIndexChanged += gcnew System::EventHandler(this, &ScoresForm::scores_lst_SelectedIndexChanged);
 		// 
 		// label2
 		// 
@@ -114,7 +122,7 @@ private:
 			static_cast<System::Byte>(0)));
 		this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->label4->Location = System::Drawing::Point(552, 154);
+		this->label4->Location = System::Drawing::Point(563, 137);
 		this->label4->Name = L"label4";
 		this->label4->Size = System::Drawing::Size(75, 29);
 		this->label4->TabIndex = 6;
@@ -127,7 +135,7 @@ private:
 			static_cast<System::Byte>(0)));
 		this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->label5->Location = System::Drawing::Point(552, 207);
+		this->label5->Location = System::Drawing::Point(563, 190);
 		this->label5->Name = L"label5";
 		this->label5->Size = System::Drawing::Size(107, 29);
 		this->label5->TabIndex = 7;
@@ -140,11 +148,11 @@ private:
 			static_cast<System::Byte>(0)));
 		this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->label6->Location = System::Drawing::Point(552, 260);
+		this->label6->Location = System::Drawing::Point(563, 243);
 		this->label6->Name = L"label6";
-		this->label6->Size = System::Drawing::Size(145, 29);
+		this->label6->Size = System::Drawing::Size(151, 29);
 		this->label6->TabIndex = 8;
-		this->label6->Text = L"No. Questions";
+		this->label6->Text = L"No. Questions:";
 		// 
 		// label7
 		// 
@@ -153,11 +161,11 @@ private:
 			static_cast<System::Byte>(0)));
 		this->label7->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->label7->Location = System::Drawing::Point(552, 313);
+		this->label7->Location = System::Drawing::Point(563, 296);
 		this->label7->Name = L"label7";
-		this->label7->Size = System::Drawing::Size(151, 29);
+		this->label7->Size = System::Drawing::Size(157, 29);
 		this->label7->TabIndex = 9;
-		this->label7->Text = L"Right Answers";
+		this->label7->Text = L"Right Answers:";
 		// 
 		// label8
 		// 
@@ -166,11 +174,11 @@ private:
 			static_cast<System::Byte>(0)));
 		this->label8->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->label8->Location = System::Drawing::Point(552, 366);
+		this->label8->Location = System::Drawing::Point(563, 349);
 		this->label8->Name = L"label8";
-		this->label8->Size = System::Drawing::Size(161, 29);
+		this->label8->Size = System::Drawing::Size(167, 29);
 		this->label8->TabIndex = 10;
-		this->label8->Text = L"Wrong Answers";
+		this->label8->Text = L"Wrong Answers:";
 		// 
 		// score_l
 		// 
@@ -178,11 +186,11 @@ private:
 		this->score_l->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
 		this->score_l->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->score_l->Location = System::Drawing::Point(732, 154);
+		this->score_l->Location = System::Drawing::Point(737, 137);
 		this->score_l->Name = L"score_l";
-		this->score_l->Size = System::Drawing::Size(109, 29);
+		this->score_l->Size = System::Drawing::Size(136, 29);
 		this->score_l->TabIndex = 12;
-		this->score_l->Text = L"Username:";
+		this->score_l->Text = L"Selecte Score";
 		// 
 		// timeDate_l
 		// 
@@ -190,11 +198,11 @@ private:
 		this->timeDate_l->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
 		this->timeDate_l->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->timeDate_l->Location = System::Drawing::Point(732, 207);
+		this->timeDate_l->Location = System::Drawing::Point(737, 190);
 		this->timeDate_l->Name = L"timeDate_l";
-		this->timeDate_l->Size = System::Drawing::Size(109, 29);
+		this->timeDate_l->Size = System::Drawing::Size(136, 29);
 		this->timeDate_l->TabIndex = 13;
-		this->timeDate_l->Text = L"Username:";
+		this->timeDate_l->Text = L"Selecte Score";
 		// 
 		// questions_l
 		// 
@@ -202,11 +210,11 @@ private:
 		this->questions_l->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
 		this->questions_l->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->questions_l->Location = System::Drawing::Point(732, 260);
+		this->questions_l->Location = System::Drawing::Point(737, 243);
 		this->questions_l->Name = L"questions_l";
-		this->questions_l->Size = System::Drawing::Size(109, 29);
+		this->questions_l->Size = System::Drawing::Size(136, 29);
 		this->questions_l->TabIndex = 14;
-		this->questions_l->Text = L"Username:";
+		this->questions_l->Text = L"Selecte Score";
 		// 
 		// rightAnswers_l
 		// 
@@ -214,11 +222,11 @@ private:
 		this->rightAnswers_l->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
 		this->rightAnswers_l->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->rightAnswers_l->Location = System::Drawing::Point(732, 313);
+		this->rightAnswers_l->Location = System::Drawing::Point(737, 296);
 		this->rightAnswers_l->Name = L"rightAnswers_l";
-		this->rightAnswers_l->Size = System::Drawing::Size(109, 29);
+		this->rightAnswers_l->Size = System::Drawing::Size(136, 29);
 		this->rightAnswers_l->TabIndex = 15;
-		this->rightAnswers_l->Text = L"Username:";
+		this->rightAnswers_l->Text = L"Selecte Score";
 		// 
 		// wrongAnswers_l
 		// 
@@ -226,11 +234,11 @@ private:
 		this->wrongAnswers_l->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
 		this->wrongAnswers_l->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->wrongAnswers_l->Location = System::Drawing::Point(732, 366);
+		this->wrongAnswers_l->Location = System::Drawing::Point(737, 349);
 		this->wrongAnswers_l->Name = L"wrongAnswers_l";
-		this->wrongAnswers_l->Size = System::Drawing::Size(109, 29);
+		this->wrongAnswers_l->Size = System::Drawing::Size(136, 29);
 		this->wrongAnswers_l->TabIndex = 16;
-		this->wrongAnswers_l->Text = L"Username:";
+		this->wrongAnswers_l->Text = L"Selecte Score";
 		// 
 		// label3
 		// 
@@ -239,7 +247,7 @@ private:
 			static_cast<System::Byte>(0)));
 		this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->label3->Location = System::Drawing::Point(552, 94);
+		this->label3->Location = System::Drawing::Point(563, 84);
 		this->label3->Name = L"label3";
 		this->label3->Size = System::Drawing::Size(115, 29);
 		this->label3->TabIndex = 5;
@@ -251,11 +259,11 @@ private:
 		this->username_l->Font = (gcnew System::Drawing::Font(L"Rubik", 14));
 		this->username_l->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(244)), static_cast<System::Int32>(static_cast<System::Byte>(240)),
 			static_cast<System::Int32>(static_cast<System::Byte>(187)));
-		this->username_l->Location = System::Drawing::Point(732, 94);
+		this->username_l->Location = System::Drawing::Point(737, 84);
 		this->username_l->Name = L"username_l";
-		this->username_l->Size = System::Drawing::Size(109, 29);
+		this->username_l->Size = System::Drawing::Size(136, 29);
 		this->username_l->TabIndex = 11;
-		this->username_l->Text = L"Username:";
+		this->username_l->Text = L"Selecte Score";
 		// 
 		// back_btn
 		// 
@@ -281,11 +289,12 @@ private:
 		// filters_cb
 		// 
 		this->filters_cb->FormattingEnabled = true;
-		this->filters_cb->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Ascending", L"Descending", L"My scores", L"All" });
+		this->filters_cb->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Oldest", L"Latest", L"My scores" });
 		this->filters_cb->Location = System::Drawing::Point(194, 84);
 		this->filters_cb->Name = L"filters_cb";
 		this->filters_cb->Size = System::Drawing::Size(284, 32);
 		this->filters_cb->TabIndex = 18;
+		this->filters_cb->SelectedIndexChanged += gcnew System::EventHandler(this, &ScoresForm::filters_cb_SelectedIndexChanged);
 		// 
 		// ScoresForm
 		// 
@@ -339,11 +348,60 @@ private: String^ getScoreAsListItem(Score^% score) {
 }
 
 private: System::Void scoresform_Load(System::Object^ sender, System::EventArgs^ e) {
-	List<Score^>^ list = _scoreManager->getList();
-	scores_lst->Items->Clear();
+	updateScoresList(_scoresManager->getList(), Filters::Oldest);
+	filters_cb->SelectedIndex = 0;
+}
 
-	for each (Score ^ %score in list) {
-		scores_lst->Items->Add(getScoreAsListItem(score));
+private:
+	void updateLabelText(Label^% label, String^ text) { label->Text = text; }
+
+	void updateScoreLabels(Score^ score) {
+		updateLabelText(username_l, score->getUsername());
+		updateLabelText(score_l, score->getScore().ToString());
+		updateLabelText(timeDate_l, score->getTimeDate());
+		updateLabelText(questions_l, score->getNumberOfQuestions().ToString());
+		updateLabelText(rightAnswers_l, score->getRightAnswers().ToString());
+		updateLabelText(wrongAnswers_l, score->getWrongAnswers().ToString());
 	}
+
+	void updateScoresList(List<Score^>^ list, Filters filter) {
+		scores_lst->Items->Clear();
+
+		if (filter == Filters::Newest) list->Reverse();
+
+		if (filter == Filters::MyScores) {
+			List<Score^>^ newList = gcnew List<Score^>;
+			for each(Score ^ %score in list) {
+				if (score->getUsername() == _username) {
+					newList->Add(score);
+				}
+			}
+			list = newList;
+			delete newList;
+		}
+
+		for each(Score ^ %score in list) {
+			scores_lst->Items->Add(getScoreAsListItem(score));
+		}
+
+		if (list->Count != 0) {
+			scores_lst->SelectedIndex = 0;
+		}
+	}
+
+	System::Void scores_lst_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		int i = scores_lst->SelectedIndex;
+		if (i == -1) {
+			MessageBox::Show("No Score Selected");
+			return;
+		}
+
+		updateScoreLabels(_scoresManager->getList()[i]);
+	}
+
+private: System::Void filters_cb_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	int i = filters_cb->SelectedIndex;
+	Filters filter = Filters(i);
+	updateScoresList(_scoresManager->getList(), filter);
 }
 };
